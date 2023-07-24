@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock-Paper-Scissor Game</title>
+</head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+
+      margin: 0;
+      gap: 1em;
+
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+      button {
+        background-color: rgb(244, 120, 120);
+        padding: 1em;
+        width: 100px;
+
+        border: none;
+        border-radius: 10px;
+        transition: .2s ease-in-out;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      button:hover {
+        transform: scale(1.1) translateY(-8px);
+        transition: .2s ease-in-out;
+        box-shadow: 0 0 20px rgb(209, 209, 209);
+      }
+  </style>
+<body>
+
+
+    <p id="resultDisplay">Choose your move~</p>
+    <p id="computerDisplay">Computer is thinking...</p>
+
+    
+ 
+
+  <div class="selection">
+    <button onclick="playerOutput('rock')">Rock</button>
+    <button onclick="playerOutput('paper')">Paper</button>
+    <button onclick="playerOutput('scissor')">Scissor</button>
+  </div>
+
+
+  <script>
+     //computer output
+    function computerOutput() {
+      const choices = ['rock', 'paper', 'scissor']
+      const generateRandomChoice = Math.floor(Math.random() * choices.length)
+      const generateRandomResult = choices[generateRandomChoice]
+
+      return generateRandomResult 
+    }
+
+   
+
+    function playerOutput(playerChoice) {
+      console.log("Computer picks:" + computerOutput()) //
+      console.log("Player picks:" + playerChoice) //
+
+      const computerResult = computerOutput()
+      const result = playRound(playerChoice, computerResult)
+
+      document.getElementById("resultDisplay").innerHTML = result
+      document.getElementById('computerDisplay').innerHTML = "I'll go with: " + computerResult + " <strong>-  computer</strong>"
+    }
+
+    function playRound(playerOutput, computerOutput) {
+      if(playerOutput === computerOutput) {return "<strong> It's a tie! </strong>"} 
+
+      else if (
+        (playerOutput === 'rock' && computerOutput === 'scissor') ||
+        (playerOutput === 'paper' && computerOutput === 'rock') || 
+        (playerOutput === 'scissors' && computerOutput === 'rock')
+      ) { return `You win! <strong> ${playerOutput} </strong> beats <strong> ${computerOutput} </strong>` }
+
+      else { return `You lose! <strong> ${computerOutput} </strong> beats <strong> ${playerOutput} </strong>` }
+    }
+
+  </script>
+</body>
+</html>
